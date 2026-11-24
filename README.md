@@ -6,15 +6,64 @@
 
 **看到一条剪得好的片子，让你的 AI 把它的剪辑风格拆成一套照着就能做的规矩。**
 
-8 条底线 · 40 个踩过的坑 · 3 种验法 · 7 个量帧脚本
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](LICENSE) [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Standard-green)](https://agentskills.io) [![Runtime](https://img.shields.io/badge/Runtime-Claude%20Code%20%7C%20Codex%20%7C%20WorkBuddy-blueviolet)](#安装)
 
 ```sh
 npx skills add jincheng2026/jc-video-reverse
 ```
 
-[看效果](#看效果) · [能做什么](#能做什么) · [它交回什么](#它交回什么) · [凭什么信它](#凭什么信它) · [安装](#安装) · [做不到的](#做不到的)
+[它是什么](#它是什么) · [快速开始](#快速开始) · [看效果](#看效果) · [凭什么信它](#凭什么信它) · [做不到的](#做不到的) · [安装](#安装) · [English](#english)
 
 </div>
+
+---
+
+## 它是什么
+
+jc-video-reverse 是一个 Agent Skill。你给它同一种剪辑风格的两三条成片，它一帧一帧地看，交回一份「风格说明包」：这种风格每一屏怎么排、东西怎么动、用几帧、走什么曲线、标注和大字怎么出、声音卡在哪。
+
+装好以后，你可以让 AI：
+
+- 把一位博主的剪辑风格拆成规矩，拿去给剪辑师照着剪，或者做成这种风格的剪辑模板
+- 只问一个动效：「这个是怎么出来、怎么消失的」，它把那几帧排开，量出用几帧、什么曲线
+- 拆完自己验一遍：照拆解重做一屏和原片逐帧比，再把素材换成色块，证明不是从原片贴的
+- 把活分好：哪些 AI 直接套、哪些要剪辑师定、哪些交给剪映的自带特效
+
+适合想让 AI 照某种风格剪片的博主，和带剪辑团队、想把好风格变成固定做法的人。它只拆剪辑和包装，不拆文案，也不替你剪新片。
+
+## 快速开始
+
+**第 1 步：安装**
+
+在终端运行：
+
+```sh
+npx skills add jincheng2026/jc-video-reverse
+```
+
+不想开终端，就直接跟你的 AI 说「帮我安装这个 Skill：https://github.com/jincheng2026/jc-video-reverse 」。其他装法见下文[安装](#安装)。
+
+**第 2 步：把片子交给它**
+
+把下面这段整个发给你的 AI（Claude Code、Codex、WorkBuddy 都行），把片子的路径或链接贴在最后：
+
+```text
+用 jc-video-reverse 这个 Skill 拆一下这种剪辑风格，做完把风格说明包的完整路径发给我。
+没装这个 Skill 就先照 https://github.com/jincheng2026/jc-video-reverse 的说明装好；
+缺 ffmpeg、numpy、Pillow 这些就直接装，要我输密码或点授权时提醒我。
+拆完是给剪辑师在剪映里照着做用的。同一种风格的片子在这里（最新的排最前）：
+```
+
+同一种风格最好给两到三条。只给一条也能拆，但分不出哪些是这种风格固定的、哪些只是这一条的。
+
+**第 3 步：在同一个对话里接着问**
+
+拿到说明包以后，直接接着说，不用重新发上面那段：
+
+```text
+第 12 屏那个卡片是怎么飞进来的，逐帧排开给我看
+把「人来定」那一堆再拆细一点，哪些我的剪辑师十分钟就能定
+```
 
 ---
 
@@ -30,7 +79,7 @@ npx skills add jincheng2026/jc-video-reverse
 
 <img src="assets/dianqing.jpg" alt="靛青流光风：六个画面" width="100%" />
 
-<p align="center"><img src="assets/dianqing.gif" alt="靛青流光风：五个 Skill 一条一条亮起来" width="36%" /></p>
+<p align="center"><img src="assets/dianqing.webp" alt="靛青流光风：五个 Skill 一条一条亮起来" width="36%" /></p>
 
 #### 黑台橙标风（横屏教程）
 
@@ -38,7 +87,7 @@ npx skills add jincheng2026/jc-video-reverse
 
 <img src="assets/heitai.jpg" alt="黑台橙标风：四个画面" width="100%" />
 
-<p align="center"><img src="assets/heitai.gif" alt="黑台橙标风：三条要求一条一条贴到纸上" width="72%" /></p>
+<p align="center"><img src="assets/heitai.webp" alt="黑台橙标风：三条要求一条一条贴到纸上" width="72%" /></p>
 
 拆解只交规矩和零件，片子是另外剪的。拆得清楚，剪的时候 AI 才知道每一屏该放什么、东西怎么进来、用几帧。
 
@@ -63,27 +112,6 @@ npx skills add jincheng2026/jc-video-reverse
 <img src="assets/quxian.png" alt="图滑进来的曲线：13 帧，每帧走的距离" width="100%" />
 
 拆「红白大字风」（一种颜值分析口播）时，两个 AI 各自独立量，结论一样：两条片子里图滑进来用的是同一条曲线，横着滑和竖着滑也是同一条。每屏不同的只有三样：第几帧开始、走多远、用几帧。知道了这个，AI 就不用每一屏重新猜。
-
----
-
-## 能做什么
-
-| 你说 | 它做 |
-| --- | --- |
-| 「拆一下这个剪辑风格」「把他的剪辑风格拆出来」 | 走完六步：全片过一遍、一屏一屏拆、一帧一帧量动效、几条对着看、验、交说明包 |
-| 「把这种剪辑风格做成模板」「我想让 AI 也能剪出这种风格」 | 同上。说明包就是以后做这种风格的剪辑 Skill 和模板的原料 |
-| 「这个动效是怎么出现怎么消失的」「按帧拆一下它的动效」 | 只拆这一个动作：逐帧排开看，量出用几帧、什么曲线，直接回答 |
-
-它只拆剪辑和包装：画面怎么排、东西怎么动、标注和大字怎么出、声音卡在哪。它不拆文案，不剪新片。
-
-最省事的用法，是把下面这段话整个发给你的 AI（Claude Code、Codex、WorkBuddy 都行），把片子的路径或链接贴在最后：
-
-```text
-用 jc-video-reverse 这个 Skill 拆一下这种剪辑风格，做完把风格说明包的完整路径发给我。
-没装这个 Skill 就先照 https://github.com/jincheng2026/jc-video-reverse 的说明装好；
-缺 ffmpeg、numpy、Pillow 这些就直接装，要我输密码或点授权时提醒我。
-拆完是给剪辑师在剪映里照着做用的。同一种风格的片子在这里（最新的排最前）：
-```
 
 ---
 
