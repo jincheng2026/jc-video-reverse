@@ -19,9 +19,11 @@
 import json, sys
 import lib
 
-if len(sys.argv) != 4:
-    lib.die(__doc__)
-bd, gk, out = json.load(open(sys.argv[1])), json.load(open(sys.argv[2])), sys.argv[3]
+import argparse
+ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+ap.add_argument('yinxiao', help='音效时间表 JSON（格式见上）'); ap.add_argument('gaikuang', help='quanpian.py 出的 全片概况.json'); ap.add_argument('out', help='输出的 .md')
+a = ap.parse_args()
+bd, gk, out = json.load(open(a.yinxiao)), json.load(open(a.gaikuang)), a.out
 fps = gk['视频']['帧率']; cuts = gk['换屏候选']; acts = gk['动作区间']
 au = bd.get('audio', {}); ev = (au.get('sfx') or {}).get('events', []); mu = au.get('music') or {}
 ZH = {'ding': '叮', 'pop': '啵', 'click': '咔哒', 'whoosh': '呼', 'swoosh': '呼', 'boom': '咚', 'impact': '撞击', 'riser': '上升音'}

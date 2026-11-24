@@ -52,9 +52,11 @@ def one(src, dst):
 
 
 def main():
-    if len(sys.argv) != 3:
-        lib.die(__doc__)
-    src, out = sys.argv[1], sys.argv[2]
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('src', help='素材文件夹或单个文件'); ap.add_argument('out', help='替身输出文件夹')
+    a = ap.parse_args()
+    src, out = a.src, a.out
     if os.path.abspath(out).startswith(os.path.abspath(src) + os.sep) or os.path.abspath(out) == os.path.abspath(src):
         lib.die('替身输出文件夹不能放在素材文件夹里面，也不能就是它。')
     cnt = {}

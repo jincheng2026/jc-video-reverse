@@ -12,7 +12,7 @@
 npx skills add jincheng2026/jc-video-reverse
 ```
 
-[它是什么](#它是什么) · [快速开始](#快速开始) · [看效果](#看效果) · [凭什么信它](#凭什么信它) · [做不到的](#做不到的) · [安装](#安装) · [English](#english)
+[它是什么](#它是什么) · [快速开始](#快速开始) · [看效果](#看效果) · [凭什么信它](#凭什么信它) · [做不到的](#做不到的) · [安装](#安装) · [遇到问题](#遇到问题) · [English](#english)
 
 </div>
 
@@ -91,7 +91,7 @@ npx skills add jincheng2026/jc-video-reverse
 
 拆解只交规矩和零件，片子是另外剪的。拆得清楚，剪的时候 AI 才知道每一屏该放什么、东西怎么进来、用几帧。
 
-<sub>画面都来自作者自己发过的视频。</sub>
+<sub>画面都来自作者自己做的视频。</sub>
 
 ### 它怎么看一条片子：每 0.2 秒一格，一张不落
 
@@ -204,6 +204,25 @@ git clone https://github.com/jincheng2026/jc-video-reverse.git ~/.claude/skills/
 要用到：`python3`（带 `numpy` 和 `Pillow`）、`ffmpeg`、`zsh`。缺什么 AI 会自己装。
 
 电脑同时开着很多 AI 对话、跑不动重活时，可以配另一台电脑替你跑抽帧和渲染（可选，写法见 [scripts/pao.sh](scripts/pao.sh) 开头）。不配就全在本机跑。
+
+装好以后检查一下：
+
+```sh
+ffmpeg -version | head -1
+python3 -c "import numpy, PIL; print('numpy', numpy.__version__, 'Pillow', PIL.__version__)"
+```
+
+两行都打出版本号就可以用了。
+
+## 遇到问题
+
+| 现象 | 原因 | 怎么办 |
+| --- | --- | --- |
+| 装完的文件夹里只有 `SKILL.md`，没有 `references/`、`scripts/` | `skills` 命令版本太旧，只同步了一个文件 | `npm i -g skills@latest` 后重装，或者用上面的方式三克隆 |
+| AI 说找不到 `ffmpeg`，或者 `No module named numpy` | 电脑上缺这几样 | 跟 AI 说「把缺的装上」；macOS 上是 `brew install ffmpeg` 和 `pip3 install numpy Pillow` |
+| 总览图、对照条上的中文变成方框 | 没找到中文字体（多见于 Linux、Windows） | 设环境变量 `VIDEO_REVERSE_FONT` 指向一个中文字体文件，比如 `export VIDEO_REVERSE_FONT=/path/to/NotoSansCJK-Regular.ttc` |
+| `pao.sh` 退出码 97 | 配了另一台电脑（`VIDEO_REVERSE_REMOTE`），但连不上 | 先确认能免密码 `ssh` 上去；暂时不用就 `unset VIDEO_REVERSE_REMOTE`，回到本机跑 |
+| 提示「工作文件夹的名字里不要有空格」 | 脚本按空格拆参数 | 文件夹名里的空格换成下划线 |
 
 ---
 

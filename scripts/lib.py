@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """几个脚本共用的小工具：读视频信息、按帧读亮度、往图上写字。"""
 import json, subprocess, sys
+
+SCRIPT_INTERFACE = "internal-module"  # 只给本文件夹里的其他脚本 import，不单独跑
 import numpy as np
 
 import os
@@ -79,6 +81,9 @@ def font(size):
     try:
         return ImageFont.truetype(FONT, size)
     except Exception:
+        if not getattr(font, 'warned', False):
+            print('没找到中文字体，图上的中文会变成方框。设环境变量 VIDEO_REVERSE_FONT 指向一个中文字体文件。', file=sys.stderr)
+            font.warned = True
         return ImageFont.load_default()
 
 
