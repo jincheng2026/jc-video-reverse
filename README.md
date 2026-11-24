@@ -79,7 +79,7 @@ npx skills add jincheng2026/jc-video-reverse
 
 <img src="assets/dianqing.jpg" alt="靛青流光风：六个画面" width="100%" />
 
-<p align="center"><img src="assets/dianqing.webp" alt="靛青流光风：五个 Skill 一条一条亮起来" width="36%" /></p>
+<p align="center"><img src="assets/dianqing.webp" alt="靛青流光风：两分钟计时走完，7 步流程卡片一格格亮起来" width="36%" /></p>
 
 #### 黑台橙标风（横屏教程）
 
@@ -87,7 +87,7 @@ npx skills add jincheng2026/jc-video-reverse
 
 <img src="assets/heitai.jpg" alt="黑台橙标风：四个画面" width="100%" />
 
-<p align="center"><img src="assets/heitai.webp" alt="黑台橙标风：三条要求一条一条贴到纸上" width="72%" /></p>
+<p align="center"><img src="assets/heitai.webp" alt="黑台橙标风：模型标签一个个弹出，红圈圈住「添加模型」，窗口甩出画面" width="72%" /></p>
 
 拆解只交规矩和零件，片子是另外剪的。拆得清楚，剪的时候 AI 才知道每一屏该放什么、东西怎么进来、用几帧。
 
